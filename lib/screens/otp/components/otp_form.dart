@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-
+import 'package:shop_app/screens/init_screen.dart';
 import '../../../constants.dart';
 
 class OtpForm extends StatefulWidget {
@@ -106,7 +106,18 @@ class _OtpFormState extends State<OtpForm> {
           ),
           SizedBox(height: MediaQuery.of(context).size.height * 0.15),
           ElevatedButton(
-            onPressed: () {},
+            onPressed: () {
+              // Mock OTP verification success
+              bool isOtpValid = true; // Assume OTP is valid for testing purposes
+
+              if (isOtpValid) {
+                // Navigate to the home screen
+                Navigator.pushNamed(context, InitScreen.routeName);
+              } else {
+                // Show an error message if OTP is invalid
+                // In this case, we're always assuming success, so no need to implement this part for testing
+              }
+            },
             child: const Text("Continue"),
           ),
         ],
