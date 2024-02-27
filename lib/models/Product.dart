@@ -27,10 +27,7 @@ List<Product> demoProducts = [
   Product(
     id: 1,
     images: [
-      "assets/images/ps4_console_white_1.png",
-      "assets/images/ps4_console_white_2.png",
-      "assets/images/ps4_console_white_3.png",
-      "assets/images/ps4_console_white_4.png",
+      "assets/images/Psychologie.png",
     ],
     colors: [
       const Color(0xFFF6625E),
@@ -38,7 +35,7 @@ List<Product> demoProducts = [
       const Color(0xFFDECB9C),
       Colors.white,
     ],
-    title: "Wireless Controller for PS4™",
+    title: "J'apprends à mieux me connaître",
     price: 64.99,
     description: description,
     rating: 4.8,
@@ -48,7 +45,7 @@ List<Product> demoProducts = [
   Product(
     id: 2,
     images: [
-      "assets/images/Image Popular Product 2.png",
+      "assets/images/Metiers.png",
     ],
     colors: [
       const Color(0xFFF6625E),
@@ -56,7 +53,7 @@ List<Product> demoProducts = [
       const Color(0xFFDECB9C),
       Colors.white,
     ],
-    title: "Nike Sport White - Man Pant",
+    title: "Je trouve mes métiers préférés",
     price: 50.5,
     description: description,
     rating: 4.1,
@@ -78,7 +75,7 @@ List<Product> demoProducts = [
     description: description,
     rating: 4.1,
     isFavourite: true,
-    isPopular: true,
+    isPopular: false,
   ),
   Product(
     id: 4,
@@ -116,7 +113,7 @@ List<Product> demoProducts = [
     description: description,
     rating: 4.8,
     isFavourite: true,
-    isPopular: true,
+    isPopular: false,
   ),
   Product(
     id: 2,
@@ -133,12 +130,12 @@ List<Product> demoProducts = [
     price: 50.5,
     description: description,
     rating: 4.1,
-    isPopular: true,
+    isPopular: false,
   ),
   Product(
     id: 3,
     images: [
-      "assets/images/glap.png",
+      "assets/images/Ecoles.png",
     ],
     colors: [
       const Color(0xFFF6625E),
@@ -146,7 +143,7 @@ List<Product> demoProducts = [
       const Color(0xFFDECB9C),
       Colors.white,
     ],
-    title: "Gloves XC Omega - Polygon",
+    title: "Je postule aux écoles",
     price: 36.55,
     description: description,
     rating: 4.1,

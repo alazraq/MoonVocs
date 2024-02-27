@@ -20,7 +20,7 @@ class SearchField extends StatelessWidget {
           border: searchOutlineInputBorder,
           focusedBorder: searchOutlineInputBorder,
           enabledBorder: searchOutlineInputBorder,
-          hintText: "Rechercher un métier ou une formation",
+          hintText: "Rechercher métier ou formation",
           hintStyle: const TextStyle(
             fontSize: 14,
           ),
