@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:shop_app/constants.dart';
-import 'package:shop_app/screens/favorite/favorite_screen.dart';
+import 'package:shop_app/screens/calendar/calendar_screen.dart';
+//import 'package:shop_app/screens/chat/chat_screen.dart';
 import 'package:shop_app/screens/home/home_screen.dart';
+import 'package:shop_app/screens/favorite/favorite_screen.dart';
+import 'package:shop_app/screens/fav/fav_screen.dart'; // Added import for FavScreen
 import 'package:shop_app/screens/profile/profile_screen.dart';
 
 const Color inActiveIconColor = Color(0xFFB6B6B6);
@@ -25,13 +28,13 @@ class _InitScreenState extends State<InitScreen> {
     });
   }
 
+  // Updated pages list with FavScreen
   final pages = [
     const HomeScreen(),
     const FavoriteScreen(),
-    const Center(
-      child: Text("Chat"),
-    ),
-    const ProfileScreen()
+    const CalendarScreen(),
+    const FavScreen(), // Added FavScreen here
+    const ProfileScreen(),
   ];
 
   @override
@@ -81,20 +84,38 @@ class _InitScreenState extends State<InitScreen> {
           ),
           BottomNavigationBarItem(
             icon: SvgPicture.asset(
-              "assets/icons/Chat bubble Icon.svg",
+              "assets/icons/calendar.svg",
               colorFilter: const ColorFilter.mode(
                 inActiveIconColor,
                 BlendMode.srcIn,
               ),
             ),
             activeIcon: SvgPicture.asset(
-              "assets/icons/Chat bubble Icon.svg",
+              "assets/icons/calendar.svg",
               colorFilter: const ColorFilter.mode(
                 kPrimaryColor,
                 BlendMode.srcIn,
               ),
             ),
             label: "Chat",
+          ),
+          // Add the new heart icon here for the FavScreen
+          BottomNavigationBarItem(
+            icon: SvgPicture.asset(
+              "assets/icons/Heart Icon.svg", // Use your heart icon asset
+              colorFilter: const ColorFilter.mode(
+                inActiveIconColor,
+                BlendMode.srcIn,
+              ),
+            ),
+            activeIcon: SvgPicture.asset(
+              "assets/icons/Heart Icon.svg", // Use your heart icon asset
+              colorFilter: const ColorFilter.mode(
+                kPrimaryColor,
+                BlendMode.srcIn,
+              ),
+            ),
+            label: "Fav",
           ),
           BottomNavigationBarItem(
             icon: SvgPicture.asset(
@@ -111,7 +132,7 @@ class _InitScreenState extends State<InitScreen> {
                 BlendMode.srcIn,
               ),
             ),
-            label: "Fav",
+            label: "Profile",
           ),
         ],
       ),

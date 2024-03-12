@@ -1,27 +1,23 @@
 import 'package:flutter/material.dart';
 import '../home/components/search_field.dart';
 
-class FavoriteScreen extends StatefulWidget {
-  const FavoriteScreen({Key? key}) : super(key: key);
+class FavScreen extends StatefulWidget {
+  const FavScreen({Key? key}) : super(key: key);
 
   @override
-  _FavoriteScreenState createState() => _FavoriteScreenState();
+  _FavScreenState createState() => _FavScreenState();
 }
 
-class _FavoriteScreenState extends State<FavoriteScreen> {
+class _FavScreenState extends State<FavScreen> {
   // Examples of métiers and formations, replace with your actual data
   final List<Map<String, dynamic>> metiers = [
     {'title': 'Agent Arboricole', 'image': 'assets/images/agent_arboricole.jpeg'},
     {'title': 'Agriculteur', 'image': 'assets/images/agriculteur.jpeg'},
-    {'title': 'Agent de Sécurité', 'image': 'assets/images/agent_securite.jpeg'},
-    {'title': 'Agent de Douane', 'image': 'assets/images/agent_de_douane.jpeg'},
   ];
 
   final List<Map<String, dynamic>> formations = [
     {'title': 'EPFL', 'image': 'assets/images/EPFL.png'},
     {'title': 'CMU', 'image': 'assets/images/CMU.png'},
-    {'title': 'DTU Denmark', 'image': 'assets/images/DTU.png'},
-    {'title': 'MIT', 'image': 'assets/images/MIT.jpeg'},
   ];
 
   // A simple grid item builder function
@@ -55,7 +51,7 @@ class _FavoriteScreenState extends State<FavoriteScreen> {
                     overflow: TextOverflow.ellipsis, // Prevents the text from overflowing
                   ),
                 ),
-                const Icon(Icons.favorite_border, color: Colors.red, size: 14.0),
+                const Icon(Icons.favorite, color: Colors.red, size: 14.0),
               ],
             ),
           ),
