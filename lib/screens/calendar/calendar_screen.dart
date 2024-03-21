@@ -23,7 +23,7 @@ class _CalendarScreenState extends State<CalendarScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Book an Appointment'),
+        title: const Text('Prenez rendez-vous avec un professionnel'),
       ),
       body: SingleChildScrollView( // Allows the screen to be scrollable
         child: Column(
@@ -42,8 +42,8 @@ class _CalendarScreenState extends State<CalendarScreen> {
                   });
                 },
                 decoration: InputDecoration(
-                  labelText: 'Select Professional Type',
-                  contentPadding: EdgeInsets.symmetric(horizontal: 6.0, // Reduced padding
+                  labelText: 'Selectionnez le type de professionnel',
+                  contentPadding: const EdgeInsets.symmetric(horizontal: 6.0, // Reduced padding
                       vertical: 8.0),
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(8.0),
