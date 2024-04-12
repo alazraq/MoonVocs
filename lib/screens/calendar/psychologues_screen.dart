@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:shop_app/screens/calendar/calendar_screen.dart';
 
+import 'booking_calendar_screen.dart';
+
 class PsychologuesScreen extends StatelessWidget {
   const PsychologuesScreen({Key? key}) : super(key: key);
 
@@ -8,7 +10,13 @@ class PsychologuesScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Psychologues'),
+        title: const Text(
+          'Psychologues d\'orientation',
+          style: TextStyle(
+            fontWeight: FontWeight.bold, // Makes text bold
+            fontSize: 20.0, // Increases font size, adjust the value as needed
+          ),
+        ),
       ),
       body: ListView.builder(
         itemCount: 3, // This should be the length of your items
@@ -26,7 +34,7 @@ class PsychologuesScreen extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: <Widget>[
           Image.asset(
-            'assets/images/Psychologie.png',
+            'assets/images/Profile Image Youssouf.png',
             width: 130.0, // Example width, adjust as needed
             height: 130.0, // Example height, adjust as needed
           ),
@@ -44,7 +52,7 @@ class PsychologuesScreen extends StatelessWidget {
           const Padding(
             padding: EdgeInsets.symmetric(horizontal: 16.0, vertical: 4.0),
             child: Text(
-              'This is an example of a short description that gives more detail about the professional\'s background and expertise.',
+              'Founder & CEO at Moonweds, EPFL Alumni, Personal development expert, Psychology expert, Sadi9, Rajaal, Ismant',
               style: TextStyle(
                 fontSize: 14.0, // Smaller font size for the description
               ),
@@ -54,7 +62,7 @@ class PsychologuesScreen extends StatelessWidget {
           const Padding(
             padding: EdgeInsets.symmetric(vertical: 8.0),
             child: Text(
-              'Tarif de consultation: 150€', // Example price
+              'Tarif de consultation: 100€ /30 min', // Example price
               style: TextStyle(
                 fontSize: 16.0, // A different font size for the price
                 fontWeight: FontWeight.bold,
@@ -70,7 +78,7 @@ class PsychologuesScreen extends StatelessWidget {
               onPressed: () {
                 Navigator.of(context).push(
                   MaterialPageRoute(
-                    builder: (context) => const CalendarScreen(),
+                    builder: (context) => const BookingCalendarScreen()// const CalendarScreen(),
                   ),
                 );
               },

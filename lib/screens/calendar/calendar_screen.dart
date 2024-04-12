@@ -5,19 +5,25 @@ class CalendarScreen extends StatefulWidget {
   const CalendarScreen({Key? key}) : super(key: key);
 
   @override
-  _CalendarScreenState createState() => _CalendarScreenState();
+  CalendarScreenState createState() => CalendarScreenState();
 }
 
-class _CalendarScreenState extends State<CalendarScreen> {
+class CalendarScreenState extends State<CalendarScreen> {
   late CalendarFormat _calendarFormat = CalendarFormat.month;
   late DateTime _focusedDay = DateTime.now();
   DateTime? _selectedDay;
-  final List<String> _professionalTypes = [
-    'Psychologues',
-    'Coachs et conseillers en orientation scolaire',
-    'Experts métiers',
-  ];
-  String? _selectedProfessionalType;
+  Map<DateTime, List<String>> _availableTimeslots = {};
+  List<String>? _selectedTimeslots;
+
+  @override
+  void initState() {
+    super.initState();
+    // Populate the _availableTimeslots with some sample data
+    DateTime today = DateTime.now();
+    DateTime todayWithoutTime = DateTime(today.year, today.month, today.day);
+    _availableTimeslots[todayWithoutTime] = ['9:00 AM', '11:00 AM', '2:00 PM'];
+    _availableTimeslots[todayWithoutTime.add(Duration(days: 1))] = ['10:00 AM', '1:00 PM', '3:00 PM'];
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -25,32 +31,9 @@ class _CalendarScreenState extends State<CalendarScreen> {
       appBar: AppBar(
         title: const Text('Prenez rendez-vous avec un professionnel'),
       ),
-      body: SingleChildScrollView( // Allows the screen to be scrollable
+      body: SingleChildScrollView(
         child: Column(
           children: [
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: DropdownButtonFormField<String>(
-                value: _selectedProfessionalType,
-                items: _professionalTypes.map((type) => DropdownMenuItem<String>(
-                  value: type,
-                  child: Text(type),
-                )).toList(),
-                onChanged: (value) {
-                  setState(() {
-                    _selectedProfessionalType = value;
-                  });
-                },
-                decoration: InputDecoration(
-                  labelText: 'Selectionnez le type de professionnel',
-                  contentPadding: const EdgeInsets.symmetric(horizontal: 6.0, // Reduced padding
-                      vertical: 8.0),
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(8.0),
-                  ),
-                ),
-              ),
-            ),
             TableCalendar(
               firstDay: DateTime.utc(2020, 1, 1),
               lastDay: DateTime.utc(2030, 12, 31),
@@ -61,6 +44,9 @@ class _CalendarScreenState extends State<CalendarScreen> {
                 setState(() {
                   _selectedDay = selectedDay;
                   _focusedDay = focusedDay;
+                  // Ensure we get the timeslots for the selected day without time component
+                  DateTime dateKey = DateTime(selectedDay.year, selectedDay.month, selectedDay.day);
+                  _selectedTimeslots = _availableTimeslots[dateKey];
                 });
               },
               onFormatChanged: (format) {
@@ -74,8 +60,31 @@ class _CalendarScreenState extends State<CalendarScreen> {
                 _focusedDay = focusedDay;
               },
             ),
+            if (_selectedTimeslots != null) ..._selectedTimeslots!.map((timeslot) => ListTile(
+              title: Text(timeslot),
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => PaymentScreen()),
+                );
+              },
+            )).toList(),
           ],
         ),
+      ),
+    );
+  }
+}
+
+class PaymentScreen extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Payment'),
+      ),
+      body: Center(
+        child: Text('Payment Screen'),
       ),
     );
   }

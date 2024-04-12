@@ -19,8 +19,8 @@ class BookingScreen extends StatelessWidget {
       body: GridView.count(
         crossAxisCount: 2,
         children: <Widget>[
-          _buildCategoryCard(context, 'Psychologues', Icons.schedule, const PsychologuesScreen()),
-          _buildCategoryCard(context, 'Coachs et conseillers en orientation scolaire', Icons.school, const PsychologuesScreen()),
+          _buildCategoryCard(context, 'Psychologues et coachs d\'orientation', Icons.psychology, const PsychologuesScreen()),
+          _buildCategoryCard(context, 'Coachs en orientation', Icons.school, const PsychologuesScreen()),
           _buildCategoryCard(context, 'Experts métiers', Icons.work, const PsychologuesScreen()),
           _buildCategoryCard(context, 'Experts démarches administratives', Icons.admin_panel_settings, const PsychologuesScreen()),
         ],
