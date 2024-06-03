@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:shop_app/screens/init_screen.dart';
 
-class LoginSuccessScreen extends StatelessWidget {
+class SignUpSuccessScreen extends StatelessWidget {
   static String routeName = "/login_success";
 
-  const LoginSuccessScreen({super.key});
+  const SignUpSuccessScreen({super.key});
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -16,13 +16,13 @@ class LoginSuccessScreen extends StatelessWidget {
           const SizedBox(height: 16),
           Expanded(
             child: Image.asset(
-            "assets/images/success.png",
-            height: MediaQuery.of(context).size.height * 0.4, //40%
+              "assets/images/success.png",
+              height: MediaQuery.of(context).size.height * 0.4, //40%
             ),
           ),
           const SizedBox(height: 16),
           const Text(
-            "Login Success",
+            "Sign up Success",
             style: TextStyle(
               fontSize: 30,
               fontWeight: FontWeight.bold,

@@ -16,7 +16,7 @@ class SignForm extends StatefulWidget {
 
 class _SignFormState extends State<SignForm> {
   final _formKey = GlobalKey<FormState>();
-  String? email;
+  String? identifier;
   String? password;
   bool? remember = false;
   final List<String?> errors = [];
@@ -44,31 +44,24 @@ class _SignFormState extends State<SignForm> {
       child: Column(
         children: [
           TextFormField(
-            keyboardType: TextInputType.emailAddress,
-            onSaved: (newValue) => email = newValue,
+            keyboardType: TextInputType.text,
+            onSaved: (newValue) => identifier = newValue,
             onChanged: (value) {
               if (value.isNotEmpty) {
                 removeError(error: kEmailNullError);
-              } else if (emailValidatorRegExp.hasMatch(value)) {
-                removeError(error: kInvalidEmailError);
               }
               return;
             },
             validator: (value) {
               if (value!.isEmpty) {
                 addError(error: kEmailNullError);
-                return "";
-              } else if (!emailValidatorRegExp.hasMatch(value)) {
-                addError(error: kInvalidEmailError);
-                return "";
+                return "Please enter your student ID or email";
               }
               return null;
             },
             decoration: const InputDecoration(
-              labelText: "Email",
-              hintText: "Enter your email",
-              // If  you are using latest version of flutter then lable text and hint text shown like this
-              // if you r using flutter less then 1.20.* then maybe this is not working properly
+              labelText: "Student ID or email",
+              hintText: "Enter your student ID or email",
               floatingLabelBehavior: FloatingLabelBehavior.always,
               suffixIcon: CustomSurffixIcon(svgIcon: "assets/icons/Mail.svg"),
             ),
@@ -88,18 +81,16 @@ class _SignFormState extends State<SignForm> {
             validator: (value) {
               if (value!.isEmpty) {
                 addError(error: kPassNullError);
-                return "";
+                return "Please enter your password";
               } else if (value.length < 8) {
                 addError(error: kShortPassError);
-                return "";
+                return "Password is too short";
               }
               return null;
             },
             decoration: const InputDecoration(
               labelText: "Password",
               hintText: "Enter your password",
-              // If  you are using latest version of flutter then lable text and hint text shown like this
-              // if you r using flutter less then 1.20.* then maybe this is not working properly
               floatingLabelBehavior: FloatingLabelBehavior.always,
               suffixIcon: CustomSurffixIcon(svgIcon: "assets/icons/Lock.svg"),
             ),

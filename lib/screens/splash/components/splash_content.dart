@@ -19,25 +19,23 @@ class _SplashContentState extends State<SplashContent> {
   Widget build(BuildContext context) {
     return Column(
       children: <Widget>[
-        const Spacer(),
-        const Text(
-          "MoonVocs",
-          style: TextStyle(
-            fontSize: 32,
-            color: kPrimaryColor,
-            fontWeight: FontWeight.bold,
-          ),
-        ),
-        Text(
-          widget.text!,
-          textAlign: TextAlign.center,
-        ),
-        const Spacer(flex: 2),
+        const Spacer(flex: 2),  // Adjusted to add space at the top
         Image.asset(
           widget.image!,
           height: 265,
           width: 235,
         ),
+        const Spacer(),  // Add space between image and text
+        Text(
+          widget.text!,
+          textAlign: TextAlign.center,
+          style: const TextStyle( // Optional: Add some styling to the text
+            fontSize: 22,
+            color: kPrimaryColor,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+        const Spacer(),  // Add space at the bottom
       ],
     );
   }

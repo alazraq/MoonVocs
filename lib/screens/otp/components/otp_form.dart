@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:shop_app/screens/init_screen.dart';
+import 'package:shop_app/screens/sign_up_success/sign_up_success_screen.dart';
 import '../../../constants.dart';
 
 class OtpForm extends StatefulWidget {
@@ -112,7 +112,7 @@ class _OtpFormState extends State<OtpForm> {
 
               if (isOtpValid) {
                 // Navigate to the home screen
-                Navigator.pushNamed(context, InitScreen.routeName);
+                Navigator.pushNamed(context, SignUpSuccessScreen.routeName);
               } else {
                 // Show an error message if OTP is invalid
                 // In this case, we're always assuming success, so no need to implement this part for testing
