@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:shop_app/constants.dart';
-import 'package:shop_app/screens/calendar/booking_screen.dart';
+import 'package:shop_app/screens/personal/personal_screen.dart';
+//import 'package:shop_app/screens/calendar/booking_screen.dart';
 import 'package:shop_app/screens/calendar/calendar_screen.dart';
 //import 'package:shop_app/screens/chat/chat_screen.dart';
 import 'package:shop_app/screens/home/home_screen.dart';
@@ -32,8 +33,8 @@ class _InitScreenState extends State<InitScreen> {
   // Updated pages list with FavScreen
   final pages = [
     const HomeScreen(),
-    const FavoriteScreen(),
-    const BookingScreen(),
+    const FavoriteScreen(initialTabIndex: 0),
+    const PersonalScreen(),
     const FavScreen(), // Added FavScreen here
     const ProfileScreen(),
   ];
@@ -85,14 +86,18 @@ class _InitScreenState extends State<InitScreen> {
           ),
           BottomNavigationBarItem(
             icon: SvgPicture.asset(
-              "assets/icons/calendar.svg",
+              "assets/icons/rocket.svg",
+              width: 24.0,  // Set the desired width
+              height: 24.0, // Set the desired height
               colorFilter: const ColorFilter.mode(
                 inActiveIconColor,
                 BlendMode.srcIn,
               ),
             ),
             activeIcon: SvgPicture.asset(
-              "assets/icons/calendar.svg",
+              "assets/icons/rocket.svg",
+              width: 24.0,  // Set the desired width
+              height: 24.0, // Set the desired height
               colorFilter: const ColorFilter.mode(
                 kPrimaryColor,
                 BlendMode.srcIn,
@@ -103,14 +108,14 @@ class _InitScreenState extends State<InitScreen> {
           // Add the new heart icon here for the FavScreen
           BottomNavigationBarItem(
             icon: SvgPicture.asset(
-              "assets/icons/Heart Icon.svg", // Use your heart icon asset
+              "assets/icons/Plus Icon.svg", // Use your heart icon asset
               colorFilter: const ColorFilter.mode(
                 inActiveIconColor,
                 BlendMode.srcIn,
               ),
             ),
             activeIcon: SvgPicture.asset(
-              "assets/icons/Heart Icon.svg", // Use your heart icon asset
+              "assets/icons/Plus Icon.svg", // Use your heart icon asset
               colorFilter: const ColorFilter.mode(
                 kPrimaryColor,
                 BlendMode.srcIn,

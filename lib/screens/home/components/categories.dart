@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:shop_app/screens/favorite/favorite_screen.dart';
 
 class Categories extends StatelessWidget {
   const Categories({super.key});
@@ -7,10 +8,10 @@ class Categories extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     List<Map<String, dynamic>> categories = [
-      {"icon": "assets/icons/Discover.svg", "text": "Métiers"},
-      {"icon": "assets/icons/Shop Icon.svg", "text": "Formations"},
-      {"icon": "assets/icons/Cash.svg", "text": "Bourses"},
-      {"icon": "assets/icons/Bill Icon.svg", "text": "Bureaucratie"},
+      {"icon": "assets/icons/Discover.svg", "text": "Métiers", "tabIndex": 0},
+      {"icon": "assets/icons/Shop Icon.svg", "text": "Formations", "tabIndex": 2},
+      {"icon": "assets/icons/Cash.svg", "text": "Bourses", "tabIndex": 3},
+      {"icon": "assets/icons/Bill Icon.svg", "text": "Bureaucratie", "tabIndex": 2},
     ];
     return Padding(
       padding: const EdgeInsets.all(20),
@@ -19,10 +20,18 @@ class Categories extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: List.generate(
           categories.length,
-          (index) => CategoryCard(
+              (index) => CategoryCard(
             icon: categories[index]["icon"],
             text: categories[index]["text"],
-            press: () {},
+            tabIndex: categories[index]["tabIndex"],
+            press: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => FavoriteScreen(initialTabIndex: categories[index]["tabIndex"]),
+                ),
+              );
+            },
           ),
         ),
       ),
@@ -36,10 +45,12 @@ class CategoryCard extends StatelessWidget {
     required this.icon,
     required this.text,
     required this.press,
+    required this.tabIndex,
   }) : super(key: key);
 
   final String icon, text;
   final GestureTapCallback press;
+  final int tabIndex;
 
   @override
   Widget build(BuildContext context) {
