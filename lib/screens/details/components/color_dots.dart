@@ -2,15 +2,15 @@ import 'package:flutter/material.dart';
 
 import '../../../components/rounded_icon_btn.dart';
 import '../../../constants.dart';
-import '../../../models/Product.dart';
+import '../../../models/Resource.dart';
 
 class ColorDots extends StatelessWidget {
   const ColorDots({
     Key? key,
-    required this.product,
+    required this.resource,
   }) : super(key: key);
 
-  final Product product;
+  final Resource resource;
 
   @override
   Widget build(BuildContext context) {
@@ -21,9 +21,9 @@ class ColorDots extends StatelessWidget {
       child: Row(
         children: [
           ...List.generate(
-            product.colors.length,
+            resource.colors.length,
             (index) => ColorDot(
-              color: product.colors[index],
+              color: resource.colors[index],
               isSelected: index == selectedColor,
             ),
           ),

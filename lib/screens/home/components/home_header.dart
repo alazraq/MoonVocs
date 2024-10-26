@@ -1,12 +1,16 @@
-import 'package:flutter/material.dart';
+// HomeHeader widget for the MoonVocs app's HomeScreen.
+// This widget displays a search bar and a notification icon with a counter.
 
+import 'package:flutter/material.dart';
 import 'icon_btn_with_counter.dart';
 import 'search_field.dart';
 
+/// The HomeHeader widget displays a search field and a notification button.
+///
+/// This widget is located at the top of the HomeScreen, allowing users
+/// to search for products and view notifications.
 class HomeHeader extends StatelessWidget {
-  const HomeHeader({
-    Key? key,
-  }) : super(key: key);
+  const HomeHeader({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -15,13 +19,14 @@ class HomeHeader extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
+          // Search field component
           const Expanded(child: SearchField()),
           const SizedBox(width: 16),
-          const SizedBox(width: 8),
+          // Notification button with counter for unread items.
           IconBtnWithCounter(
             svgSrc: "assets/icons/Bell.svg",
-            numOfitem: 3,
-            press: () {},
+            numOfitem: 3, // Number of unread notifications.
+            press: () {}, // Define notification action here.
           ),
         ],
       ),

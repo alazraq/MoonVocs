@@ -1,5 +1,8 @@
+// This file defines all the named routes used in the MoonVocs app.
+// Each route corresponds to a screen in the app, allowing for easy navigation.
+
 import 'package:flutter/widgets.dart';
-import 'package:shop_app/screens/products/products_screen.dart';
+import 'package:shop_app/screens/resources/resources_screen.dart';
 
 import 'screens/cart/cart_screen.dart';
 import 'screens/complete_profile/complete_profile_screen.dart';
@@ -14,8 +17,10 @@ import 'screens/sign_in/sign_in_screen.dart';
 import 'screens/sign_up/sign_up_screen.dart';
 import 'screens/splash/splash_screen.dart';
 
-// We use name route
-// All our routes will be available here
+/// A map of all named routes used in the MoonVocs app.
+///
+/// This map associates route names with their respective screen widgets.
+/// It allows the app to navigate between different screens using these routes.
 final Map<String, WidgetBuilder> routes = {
   InitScreen.routeName: (context) => const InitScreen(),
   SplashScreen.routeName: (context) => const SplashScreen(),
@@ -26,7 +31,7 @@ final Map<String, WidgetBuilder> routes = {
   CompleteProfileScreen.routeName: (context) => const CompleteProfileScreen(),
   OtpScreen.routeName: (context) => const OtpScreen(),
   HomeScreen.routeName: (context) => const HomeScreen(),
-  ProductsScreen.routeName: (context) => const ProductsScreen(),
+  ResourcesScreen.routeName: (context) => const ResourcesScreen(),
   DetailsScreen.routeName: (context) => const DetailsScreen(),
   CartScreen.routeName: (context) => const CartScreen(),
   ProfileScreen.routeName: (context) => const ProfileScreen(),

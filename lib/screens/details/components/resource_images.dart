@@ -1,21 +1,21 @@
 import 'package:flutter/material.dart';
 
 import '../../../constants.dart';
-import '../../../models/Product.dart';
+import '../../../models/Resource.dart';
 
-class ProductImages extends StatefulWidget {
-  const ProductImages({
+class ResourceImages extends StatefulWidget {
+  const ResourceImages({
     Key? key,
-    required this.product,
+    required this.resource,
   }) : super(key: key);
 
-  final Product product;
+  final Resource resource;
 
   @override
-  _ProductImagesState createState() => _ProductImagesState();
+  _ResourceImagesState createState() => _ResourceImagesState();
 }
 
-class _ProductImagesState extends State<ProductImages> {
+class _ResourceImagesState extends State<ResourceImages> {
   int selectedImage = 0;
   @override
   Widget build(BuildContext context) {
@@ -25,7 +25,7 @@ class _ProductImagesState extends State<ProductImages> {
           width: 238,
           child: AspectRatio(
             aspectRatio: 1,
-            child: Image.asset(widget.product.images[selectedImage]),
+            child: Image.asset(widget.resource.images[selectedImage]),
           ),
         ),
         // SizedBox(height: 20),
@@ -33,15 +33,15 @@ class _ProductImagesState extends State<ProductImages> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             ...List.generate(
-              widget.product.images.length,
-              (index) => SmallProductImage(
+              widget.resource.images.length,
+              (index) => SmallResourceImage(
                 isSelected: index == selectedImage,
                 press: () {
                   setState(() {
                     selectedImage = index;
                   });
                 },
-                image: widget.product.images[index],
+                image: widget.resource.images[index],
               ),
             ),
           ],
@@ -51,8 +51,8 @@ class _ProductImagesState extends State<ProductImages> {
   }
 }
 
-class SmallProductImage extends StatefulWidget {
-  const SmallProductImage(
+class SmallResourceImage extends StatefulWidget {
+  const SmallResourceImage(
       {super.key,
       required this.isSelected,
       required this.press,
@@ -63,10 +63,10 @@ class SmallProductImage extends StatefulWidget {
   final String image;
 
   @override
-  State<SmallProductImage> createState() => _SmallProductImageState();
+  State<SmallResourceImage> createState() => _SmallResourceImageState();
 }
 
-class _SmallProductImageState extends State<SmallProductImage> {
+class _SmallResourceImageState extends State<SmallResourceImage> {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(

@@ -1,34 +1,45 @@
+// QuickAccessShortcuts widget for the MoonVocs app.
+// This widget displays shortcut cards to quickly access sections like "Métiers," "Formations," "Bourses," and "Bureaucratie."
+
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:shop_app/screens/favorite/favorite_screen.dart';
 
-class Categories extends StatelessWidget {
-  const Categories({super.key});
+/// The QuickAccessShortcuts widget provides direct access to key app sections.
+///
+/// Each shortcut is represented by an icon and text, and redirects to a
+/// specified tab within the FavoriteScreen.
+class QuickAccessShortcuts extends StatelessWidget {
+  const QuickAccessShortcuts({super.key});
 
   @override
   Widget build(BuildContext context) {
-    List<Map<String, dynamic>> categories = [
+    // List of shortcuts with icon, text label, and target tab index.
+    List<Map<String, dynamic>> shortcuts = [
       {"icon": "assets/icons/Discover.svg", "text": "Métiers", "tabIndex": 0},
       {"icon": "assets/icons/Shop Icon.svg", "text": "Formations", "tabIndex": 2},
       {"icon": "assets/icons/Cash.svg", "text": "Bourses", "tabIndex": 3},
       {"icon": "assets/icons/Bill Icon.svg", "text": "Bureaucratie", "tabIndex": 2},
     ];
+
     return Padding(
       padding: const EdgeInsets.all(20),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: List.generate(
-          categories.length,
-              (index) => CategoryCard(
-            icon: categories[index]["icon"],
-            text: categories[index]["text"],
-            tabIndex: categories[index]["tabIndex"],
+          shortcuts.length,
+              (index) => ShortcutCard(
+            icon: shortcuts[index]["icon"],
+            text: shortcuts[index]["text"],
+            tabIndex: shortcuts[index]["tabIndex"],
             press: () {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => FavoriteScreen(initialTabIndex: categories[index]["tabIndex"]),
+                  builder: (context) => FavoriteScreen(
+                    initialTabIndex: shortcuts[index]["tabIndex"],
+                  ),
                 ),
               );
             },
@@ -39,8 +50,15 @@ class Categories extends StatelessWidget {
   }
 }
 
-class CategoryCard extends StatelessWidget {
-  const CategoryCard({
+/// The ShortcutCard widget displays an icon and label for each quick access shortcut.
+///
+/// When tapped, it navigates to the specified tab in the FavoriteScreen.
+class ShortcutCard extends StatelessWidget {
+  final String icon, text;
+  final GestureTapCallback press;
+  final int tabIndex;
+
+  const ShortcutCard({
     Key? key,
     required this.icon,
     required this.text,
@@ -48,16 +66,13 @@ class CategoryCard extends StatelessWidget {
     required this.tabIndex,
   }) : super(key: key);
 
-  final String icon, text;
-  final GestureTapCallback press;
-  final int tabIndex;
-
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: press,
       child: Column(
         children: [
+          // Icon container with background color and rounded corners.
           Container(
             padding: const EdgeInsets.all(16),
             height: 56,
@@ -66,10 +81,14 @@ class CategoryCard extends StatelessWidget {
               color: const Color(0xFFFFECDF),
               borderRadius: BorderRadius.circular(10),
             ),
-            child: SvgPicture.asset(icon),
+            child: SvgPicture.asset(icon), // Displays the icon.
           ),
           const SizedBox(height: 4),
-          Text(text, textAlign: TextAlign.center)
+          // Label for the shortcut.
+          Text(
+            text,
+            textAlign: TextAlign.center,
+          ),
         ],
       ),
     );

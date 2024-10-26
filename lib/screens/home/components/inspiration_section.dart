@@ -1,45 +1,54 @@
-import 'package:flutter/material.dart';
-import 'package:shop_app/screens/products/products_screen.dart';
+// InspirationSection widget for the MoonVocs app.
+// This widget displays a horizontal scrollable section with inspiration cards,
+// each representing a category of resources, like "Informatique" or "Fashion."
 
+import 'package:flutter/material.dart';
+import 'package:shop_app/screens/resources/resources_screen.dart';
 import 'section_title.dart';
 
-class SpecialOffers extends StatelessWidget {
-  const SpecialOffers({
-    Key? key,
-  }) : super(key: key);
+/// The InspirationSection widget displays a row of cards representing different
+/// categories, encouraging students to explore topics that inspire them.
+class InspirationSection extends StatelessWidget {
+  const InspirationSection({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
+        // Title section with a label and action button.
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 20),
           child: SectionTitle(
             title: "Trouver de l'inspiration",
-            press: () {},
+            press: () {
+              // Action for title button (define functionality here if needed).
+            },
           ),
         ),
+        // Horizontal scrollable row of inspiration cards.
         SingleChildScrollView(
           scrollDirection: Axis.horizontal,
           child: Row(
             children: [
-              SpecialOfferCard(
+              // Inspiration card for the "Informatique" category.
+              InspirationCard(
                 image: "assets/images/Image Banner 2.png",
                 category: "Informatique",
-                numOfBrands: 18,
+                numOfTopics: 18,
                 press: () {
-                  Navigator.pushNamed(context, ProductsScreen.routeName);
+                  Navigator.pushNamed(context, ResourcesScreen.routeName);
                 },
               ),
-              SpecialOfferCard(
+              // Inspiration card for the "Fashion" category.
+              InspirationCard(
                 image: "assets/images/Image Banner 3.png",
                 category: "Fashion",
-                numOfBrands: 12,
+                numOfTopics: 12,
                 press: () {
-                  Navigator.pushNamed(context, ProductsScreen.routeName);
+                  Navigator.pushNamed(context, ResourcesScreen.routeName);
                 },
               ),
-              const SizedBox(width: 20),
+              const SizedBox(width: 20), // Extra space at the end.
             ],
           ),
         ),
@@ -48,18 +57,20 @@ class SpecialOffers extends StatelessWidget {
   }
 }
 
-class SpecialOfferCard extends StatelessWidget {
-  const SpecialOfferCard({
+/// The InspirationCard widget displays an individual category card with an image,
+/// title, and description of the number of related topics or métiers.
+class InspirationCard extends StatelessWidget {
+  final String category, image;
+  final int numOfTopics;
+  final GestureTapCallback press;
+
+  const InspirationCard({
     Key? key,
     required this.category,
     required this.image,
-    required this.numOfBrands,
+    required this.numOfTopics,
     required this.press,
   }) : super(key: key);
-
-  final String category, image;
-  final int numOfBrands;
-  final GestureTapCallback press;
 
   @override
   Widget build(BuildContext context) {
@@ -74,10 +85,12 @@ class SpecialOfferCard extends StatelessWidget {
             borderRadius: BorderRadius.circular(20),
             child: Stack(
               children: [
+                // Background image for the inspiration card.
                 Image.asset(
                   image,
                   fit: BoxFit.cover,
                 ),
+                // Gradient overlay to enhance text readability.
                 Container(
                   decoration: const BoxDecoration(
                     gradient: LinearGradient(
@@ -92,6 +105,7 @@ class SpecialOfferCard extends StatelessWidget {
                     ),
                   ),
                 ),
+                // Text content with category name and number of topics.
                 Padding(
                   padding: const EdgeInsets.symmetric(
                     horizontal: 15,
@@ -108,7 +122,7 @@ class SpecialOfferCard extends StatelessWidget {
                             fontWeight: FontWeight.bold,
                           ),
                         ),
-                        TextSpan(text: "$numOfBrands métiers")
+                        TextSpan(text: "$numOfTopics métiers"),
                       ],
                     ),
                   ),

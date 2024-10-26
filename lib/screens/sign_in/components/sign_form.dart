@@ -1,3 +1,6 @@
+// Sign-in form widget for the MoonVocs app.
+// This form collects the user's email and password and validates input before proceeding.
+
 import 'package:flutter/material.dart';
 
 import '../../../components/custom_surfix_icon.dart';
@@ -7,6 +10,11 @@ import '../../../helper/keyboard.dart';
 import '../../forgot_password/forgot_password_screen.dart';
 import '../../login_success/login_success_screen.dart';
 
+/// The SignForm widget collects user credentials for the sign-in process.
+///
+/// It includes fields for the user’s email (or student ID) and password,
+/// with validation checks for both. If valid, the user is directed to
+/// the login success screen.
 class SignForm extends StatefulWidget {
   const SignForm({super.key});
 
@@ -15,12 +23,22 @@ class SignForm extends StatefulWidget {
 }
 
 class _SignFormState extends State<SignForm> {
+  // Global key for form state management.
   final _formKey = GlobalKey<FormState>();
+
+  // User's email or student ID.
   String? identifier;
+
+  // User's password.
   String? password;
+
+  // Whether the user wants to be remembered for future logins.
   bool? remember = false;
+
+  // List of form error messages.
   final List<String?> errors = [];
 
+  /// Adds a form error message if it's not already present.
   void addError({String? error}) {
     if (!errors.contains(error)) {
       setState(() {
@@ -29,6 +47,7 @@ class _SignFormState extends State<SignForm> {
     }
   }
 
+  /// Removes a form error message if it exists.
   void removeError({String? error}) {
     if (errors.contains(error)) {
       setState(() {
@@ -37,12 +56,15 @@ class _SignFormState extends State<SignForm> {
     }
   }
 
+  /// Builds the form widget tree, which includes input fields for email and password,
+  /// a "Remember me" checkbox, and a submit button.
   @override
   Widget build(BuildContext context) {
     return Form(
-      key: _formKey,
+      key: _formKey, // Associates the form with the form state.
       child: Column(
         children: [
+          // Email/ID input field
           TextFormField(
             keyboardType: TextInputType.text,
             onSaved: (newValue) => identifier = newValue,
@@ -50,7 +72,6 @@ class _SignFormState extends State<SignForm> {
               if (value.isNotEmpty) {
                 removeError(error: kEmailNullError);
               }
-              return;
             },
             validator: (value) {
               if (value!.isEmpty) {
@@ -60,13 +81,14 @@ class _SignFormState extends State<SignForm> {
               return null;
             },
             decoration: const InputDecoration(
-              labelText: "Student ID or email",
+              labelText: "Student ID or Email",
               hintText: "Enter your student ID or email",
               floatingLabelBehavior: FloatingLabelBehavior.always,
               suffixIcon: CustomSurffixIcon(svgIcon: "assets/icons/Mail.svg"),
             ),
           ),
           const SizedBox(height: 20),
+          // Password input field
           TextFormField(
             obscureText: true,
             onSaved: (newValue) => password = newValue,
@@ -76,7 +98,6 @@ class _SignFormState extends State<SignForm> {
               } else if (value.length >= 8) {
                 removeError(error: kShortPassError);
               }
-              return;
             },
             validator: (value) {
               if (value!.isEmpty) {
@@ -96,6 +117,7 @@ class _SignFormState extends State<SignForm> {
             ),
           ),
           const SizedBox(height: 20),
+          // Remember me checkbox and forgot password link
           Row(
             children: [
               Checkbox(
@@ -116,16 +138,18 @@ class _SignFormState extends State<SignForm> {
                   "Forgot Password",
                   style: TextStyle(decoration: TextDecoration.underline),
                 ),
-              )
+              ),
             ],
           ),
+          // Error messages
           FormError(errors: errors),
           const SizedBox(height: 16),
+          // Submit button
           ElevatedButton(
             onPressed: () {
               if (_formKey.currentState!.validate()) {
                 _formKey.currentState!.save();
-                // if all are valid then go to success screen
+                // If all inputs are valid, navigate to the success screen.
                 KeyboardUtil.hideKeyboard(context);
                 Navigator.pushNamed(context, LoginSuccessScreen.routeName);
               }

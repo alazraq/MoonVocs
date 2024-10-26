@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:shop_app/screens/cart/cart_screen.dart';
 
-import '../../models/Product.dart';
+import '../../models/Resource.dart';
 import 'components/color_dots.dart';
-import 'components/product_description.dart';
-import 'components/product_images.dart';
+import 'components/resource_description.dart';
+import 'components/resource_images.dart';
 import 'components/top_rounded_container.dart';
 
 class DetailsScreen extends StatelessWidget {
@@ -15,9 +15,9 @@ class DetailsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final ProductDetailsArguments agrs =
-        ModalRoute.of(context)!.settings.arguments as ProductDetailsArguments;
-    final product = agrs.product;
+    final ResourceDetailsArguments agrs =
+        ModalRoute.of(context)!.settings.arguments as ResourceDetailsArguments;
+    final resource = agrs.resource;
     return Scaffold(
       extendBody: true,
       extendBodyBehindAppBar: true,
@@ -76,20 +76,20 @@ class DetailsScreen extends StatelessWidget {
       ),
       body: ListView(
         children: [
-          ProductImages(product: product),
+          ResourceImages(resource: resource),
           TopRoundedContainer(
             color: Colors.white,
             child: Column(
               children: [
-                ProductDescription(
-                  product: product,
+                ResourceDescription(
+                  resource: resource,
                   pressOnSeeMore: () {},
                 ),
                 TopRoundedContainer(
                   color: const Color(0xFFF6F7F9),
                   child: Column(
                     children: [
-                      ColorDots(product: product),
+                      ColorDots(resource: resource),
                     ],
                   ),
                 ),
@@ -116,8 +116,8 @@ class DetailsScreen extends StatelessWidget {
   }
 }
 
-class ProductDetailsArguments {
-  final Product product;
+class ResourceDetailsArguments {
+  final Resource resource;
 
-  ProductDetailsArguments({required this.product});
+  ResourceDetailsArguments({required this.resource});
 }
