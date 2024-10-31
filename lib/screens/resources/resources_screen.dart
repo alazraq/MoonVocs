@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:shop_app/components/resource_card.dart';
 import 'package:shop_app/models/Resource.dart';
 
-import '../details/details_screen.dart';
+import '../details/resource_details_screen.dart';
 
 /// The ResourcesScreen widget displays a grid view of educational resources.
 ///
@@ -37,7 +37,7 @@ class ResourcesScreen extends StatelessWidget {
               resource: demoResources[index],
               onPress: () => Navigator.pushNamed(
                 context,
-                DetailsScreen.routeName,
+                ResourceDetailsScreen.routeName,
                 arguments: ResourceDetailsArguments(
                   resource: demoResources[index],
                 ),

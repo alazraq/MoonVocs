@@ -26,7 +26,7 @@ class HomeScreen extends StatelessWidget {
           padding: EdgeInsets.symmetric(vertical: 16),
           child: Column(
             children: [
-              // Header widget with search and cart options.
+              // Header widget with search and noétifications options.
               HomeHeader(),
               // A banner displaying current discounts and promotions.
               UserProgressBanner(),

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:booking_calendar/booking_calendar.dart';
-import 'package:shop_app/screens/cart/cart_screen.dart';
 import 'package:flutter/cupertino.dart';
 
 class BookingCalendarScreen extends StatefulWidget {

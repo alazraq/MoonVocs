@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 
 import '../../../components/resource_card.dart';
 import '../../../models/Resource.dart';
-import '../../details/details_screen.dart';
+import '../../details/resource_details_screen.dart';
 import '../../resources/resources_screen.dart';
 import 'section_title.dart';
 
@@ -45,7 +45,7 @@ class OrientationResources extends StatelessWidget {
                         resource: demoResources[index],
                         onPress: () => Navigator.pushNamed(
                           context,
-                          DetailsScreen.routeName,
+                          ResourceDetailsScreen.routeName,
                           arguments: ResourceDetailsArguments(
                             resource: demoResources[index],
                           ),

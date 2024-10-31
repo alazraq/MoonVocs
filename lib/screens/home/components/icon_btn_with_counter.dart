@@ -1,5 +1,5 @@
 // IconBtnWithCounter widget for the MoonVocs app.
-// This widget displays an icon button with an optional counter for notifications or cart items.
+// This widget displays an icon button with an optional counter for notifications items.
 
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';

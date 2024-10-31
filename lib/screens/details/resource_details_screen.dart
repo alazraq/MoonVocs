@@ -1,23 +1,27 @@
+// ResourceDetailsScreen for the MoonVocs app.
+// This screen displays detailed information about a specific educational resource.
+
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:shop_app/screens/cart/cart_screen.dart';
-
 import '../../models/Resource.dart';
-import 'components/color_dots.dart';
 import 'components/resource_description.dart';
 import 'components/resource_images.dart';
 import 'components/top_rounded_container.dart';
 
-class DetailsScreen extends StatelessWidget {
-  static String routeName = "/details";
+/// The ResourceDetailsScreen widget displays detailed information for a specific resource,
+/// such as images, description, and color options.
+class ResourceDetailsScreen extends StatelessWidget {
+  static String routeName = "/resource_details";
 
-  const DetailsScreen({super.key});
+  const ResourceDetailsScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final ResourceDetailsArguments agrs =
-        ModalRoute.of(context)!.settings.arguments as ResourceDetailsArguments;
-    final resource = agrs.resource;
+    // Retrieves the resource argument passed to the screen.
+    final ResourceDetailsArguments args =
+    ModalRoute.of(context)!.settings.arguments as ResourceDetailsArguments;
+    final resource = args.resource;
+
     return Scaffold(
       extendBody: true,
       extendBodyBehindAppBar: true,
@@ -49,8 +53,7 @@ class DetailsScreen extends StatelessWidget {
             children: [
               Container(
                 margin: const EdgeInsets.only(right: 20),
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
+                padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
                 decoration: BoxDecoration(
                   color: Colors.white,
                   borderRadius: BorderRadius.circular(14),
@@ -58,7 +61,7 @@ class DetailsScreen extends StatelessWidget {
                 child: Row(
                   children: [
                     const Text(
-                      "4.7",
+                      "4.7", // Static rating placeholder.
                       style: TextStyle(
                         fontSize: 14,
                         color: Colors.black,
@@ -76,28 +79,23 @@ class DetailsScreen extends StatelessWidget {
       ),
       body: ListView(
         children: [
+          // Displays images related to the resource.
           ResourceImages(resource: resource),
           TopRoundedContainer(
             color: Colors.white,
             child: Column(
               children: [
+                // Description section for the resource.
                 ResourceDescription(
                   resource: resource,
-                  pressOnSeeMore: () {},
-                ),
-                TopRoundedContainer(
-                  color: const Color(0xFFF6F7F9),
-                  child: Column(
-                    children: [
-                      ColorDots(resource: resource),
-                    ],
-                  ),
+                  pressOnSeeMore: () {}, // Optional "See More" functionality.
                 ),
               ],
             ),
           ),
         ],
       ),
+      // Bottom navigation to save the resource.
       bottomNavigationBar: TopRoundedContainer(
         color: Colors.white,
         child: SafeArea(
@@ -105,9 +103,8 @@ class DetailsScreen extends StatelessWidget {
             padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
             child: ElevatedButton(
               onPressed: () {
-                Navigator.pushNamed(context, CartScreen.routeName);
               },
-              child: const Text("Add To Cart"),
+              child: const Text("Start"),
             ),
           ),
         ),
@@ -116,6 +113,7 @@ class DetailsScreen extends StatelessWidget {
   }
 }
 
+/// Arguments passed to the ResourceDetailsScreen, containing the resource information.
 class ResourceDetailsArguments {
   final Resource resource;
 

@@ -17,9 +17,10 @@ class QuickAccessShortcuts extends StatelessWidget {
     // List of shortcuts with icon, text label, and target tab index.
     List<Map<String, dynamic>> shortcuts = [
       {"icon": "assets/icons/Discover.svg", "text": "Métiers", "tabIndex": 0},
+      {"icon": "assets/icons/Bill Icon.svg", "text": "Ecoles", "tabIndex": 1},
       {"icon": "assets/icons/Shop Icon.svg", "text": "Formations", "tabIndex": 2},
       {"icon": "assets/icons/Cash.svg", "text": "Bourses", "tabIndex": 3},
-      {"icon": "assets/icons/Bill Icon.svg", "text": "Bureaucratie", "tabIndex": 2},
+
     ];
 
     return Padding(
