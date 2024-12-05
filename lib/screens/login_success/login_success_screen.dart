@@ -36,7 +36,7 @@ class LoginSuccessScreen extends StatelessWidget {
               onPressed: () {
                 Navigator.pushNamed(context, InitScreen.routeName);
               },
-              child: const Text("Let's build your future together!"),
+              child: const Text("Construisons ensemble ton avenir !"),
             ),
           ),
           const Spacer(),

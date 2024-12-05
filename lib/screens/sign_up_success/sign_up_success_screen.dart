@@ -50,7 +50,7 @@ class SignUpSuccessScreen extends StatelessWidget {
                 // Navigates to the InitScreen after successful sign-up.
                 Navigator.pushNamed(context, InitScreen.routeName);
               },
-              child: const Text("Let's build your future together!"),
+              child: const Text("Construisons ensemble ton avenir !"),
             ),
           ),
           const Spacer(),

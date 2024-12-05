@@ -76,13 +76,13 @@ class _SignFormState extends State<SignForm> {
             validator: (value) {
               if (value!.isEmpty) {
                 addError(error: kEmailNullError);
-                return "Please enter your student ID or email";
+                return "Please enter a valid email";
               }
               return null;
             },
             decoration: const InputDecoration(
-              labelText: "Student ID or Email",
-              hintText: "Enter your student ID or email",
+              labelText: "Email",
+              hintText: "Enter your email address",
               floatingLabelBehavior: FloatingLabelBehavior.always,
               suffixIcon: CustomSurffixIcon(svgIcon: "assets/icons/Mail.svg"),
             ),

@@ -1,23 +1,26 @@
+// SearchScreen.dart - Allows users to explore and search for resources across categories
+// like "Métiers," "Ecoles," "Formations," and "Bourses."
+
 import 'package:flutter/material.dart';
 import '../home/components/search_field.dart';
 
-class FavoriteScreen extends StatefulWidget {
+class SearchScreen extends StatefulWidget {
   final int initialTabIndex;
 
-  const FavoriteScreen({Key? key, required this.initialTabIndex}) : super(key: key);
+  const SearchScreen({Key? key, required this.initialTabIndex}) : super(key: key);
 
   @override
-  _FavoriteScreenState createState() => _FavoriteScreenState();
+  _SearchScreenState createState() => _SearchScreenState();
 }
 
-class _FavoriteScreenState extends State<FavoriteScreen> with TickerProviderStateMixin {
-  late TabController _tabController;
-  List<Map<String, dynamic>> ecoles = [];
+class _SearchScreenState extends State<SearchScreen> with TickerProviderStateMixin {
+  late TabController _tabController; // Controller for managing tab navigation
+  List<Map<String, dynamic>> ecoles = []; // Holds dynamically loaded school formations
 
   @override
   void initState() {
     super.initState();
-    loadFormations();
+    loadFormations(); // Load formations from asset
     _tabController = TabController(length: 4, vsync: this, initialIndex: widget.initialTabIndex);
   }
 
@@ -27,6 +30,7 @@ class _FavoriteScreenState extends State<FavoriteScreen> with TickerProviderStat
     super.dispose();
   }
 
+  // Sample data for "Métiers" category
   final List<Map<String, dynamic>> metiers = [
     {'title': 'Agent Arboricole', 'image': 'assets/images/agent_arboricole.jpeg'},
     {'title': 'Agent de Douane', 'image': 'assets/images/agent_de_douane.jpeg'},
@@ -38,6 +42,7 @@ class _FavoriteScreenState extends State<FavoriteScreen> with TickerProviderStat
     {'title': 'Bibliothécaire', 'image': 'assets/images/bibliothecaire.jpeg'},
   ];
 
+  // Sample data for "Formations" category
   List<Map<String, dynamic>> formations = [
     {'title': 'Conseil Psycho-éducatif', 'image': 'assets/images/agent_arboricole.jpeg'},
     {'title': 'Géosciences, Modélisation et Enseignement', 'image': 'assets/images/agent_arboricole.jpeg'},
@@ -45,10 +50,11 @@ class _FavoriteScreenState extends State<FavoriteScreen> with TickerProviderStat
     {'title': 'Licence d’éducation: Spécialité Enseignement Primaire – Langue Amazigh', 'image': 'assets/images/agent_arboricole.jpeg'},
     {'title': 'Licence d’Éducation: Spécialité Enseignement Secondaire – Langue anglaise', 'image': 'assets/images/agent_arboricole.jpeg'},
     {'title': 'Licence d’éducation: Spécialité Enseignement Secondaire – Etudes Islamique', 'image': 'assets/images/agent_arboricole.jpeg'},
-    {'title': 'Licence d’éducation: Spécialité Enseignement Secondaire- Sciences de la Vie et la Terre', 'image': 'assets/images/agent_arboricole.jpeg'},
-    {'title': 'Licence d’éducation: Spécialité Enseignement Secondaire -Philosophie', 'image': 'assets/images/agent_arboricole.jpeg'},
+    {'title': 'Licence d’éducation: Spécialité Enseignement Secondaire - Sciences de la Vie et la Terre', 'image': 'assets/images/agent_arboricole.jpeg'},
+    {'title': 'Licence d’éducation: Spécialité Enseignement Secondaire - Philosophie', 'image': 'assets/images/agent_arboricole.jpeg'},
   ];
 
+  // Sample data for "Bourses" category
   List<Map<String, dynamic>> bourses = [
     {'title': 'Bourse d’étude: Ynov Campus - Maroc 2024', 'image': 'assets/images/agent_arboricole.jpeg'},
     {'title': 'Scholarship of Excellence: Al Akhawayn University - Morocco 2024', 'image': 'assets/images/agent_arboricole.jpeg'},
@@ -57,10 +63,7 @@ class _FavoriteScreenState extends State<FavoriteScreen> with TickerProviderStat
     {'title': 'Bourse d\'excellence: SUPEMIR - Maroc 2024', 'image': 'assets/images/agent_arboricole.jpeg'},
   ];
 
-  Future<String> loadAsset(BuildContext context) async {
-    return await DefaultAssetBundle.of(context).loadString('assets/school_names.txt');
-  }
-
+  /// Load formations data from an asset file and categorize it by school.
   Future<void> loadFormations() async {
     String formationsString = await DefaultAssetBundle.of(context).loadString('assets/formations.txt');
     List<String> lines = formationsString.split('\n');
@@ -68,6 +71,7 @@ class _FavoriteScreenState extends State<FavoriteScreen> with TickerProviderStat
     Map<String, List<String>> schoolFormations = {};
     String currentSchool = '';
 
+    // Parse each line, categorizing formations under respective schools.
     for (var line in lines) {
       if (line.trim().isEmpty) {
         currentSchool = '';
@@ -81,29 +85,31 @@ class _FavoriteScreenState extends State<FavoriteScreen> with TickerProviderStat
       }
     }
 
+    // Convert map entries into a list for easier display in UI
     setState(() {
       ecoles = schoolFormations.entries.map((entry) {
         return {
           'title': entry.key,
           'formations': entry.value,
-          'image': 'assets/images/school_image.png' // Placeholder image for schools
+          'image': 'assets/images/school_image.png' // Placeholder for school images
         };
       }).toList();
     });
   }
 
+  /// Displays a dialog with a list of formations for a specific school.
   void showFormationsDialog(BuildContext context, List<String> formations) {
     showDialog(
       context: context,
       builder: (context) {
         return AlertDialog(
-          title: Text('Formations'),
+          title: const Text('Formations'),
           content: SingleChildScrollView(
             child: ListBody(
               children: formations.map((formation) => Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text('• ', style: TextStyle(fontSize: 20)),
+                  const Text('• ', style: TextStyle(fontSize: 20)),
                   Expanded(child: Text(formation)),
                 ],
               )).toList(),
@@ -111,7 +117,7 @@ class _FavoriteScreenState extends State<FavoriteScreen> with TickerProviderStat
           ),
           actions: <Widget>[
             TextButton(
-              child: Text('Close'),
+              child: const Text('Close'),
               onPressed: () {
                 Navigator.of(context).pop();
               },
@@ -122,6 +128,7 @@ class _FavoriteScreenState extends State<FavoriteScreen> with TickerProviderStat
     );
   }
 
+  /// Builds a card widget to display each item in a grid format.
   Widget buildGridItem(Map<String, dynamic> item) {
     return Card(
       shape: RoundedRectangleBorder(
@@ -161,6 +168,7 @@ class _FavoriteScreenState extends State<FavoriteScreen> with TickerProviderStat
     );
   }
 
+  /// Builds a list item widget for each "Ecole" (school).
   Widget buildEcolesListItem(Map<String, dynamic> item) {
     return GestureDetector(
       onTap: () => _tabController.animateTo(2),
@@ -192,6 +200,7 @@ class _FavoriteScreenState extends State<FavoriteScreen> with TickerProviderStat
     );
   }
 
+  /// Sample detailed information for "Formations" to display in the dialog.
   List<String> filiereDetails = [
     'INTITULÉ DE LA FILIÈRE: Conseil Psycho-éducatif',
     'OPTIONS : 1',
@@ -203,6 +212,7 @@ class _FavoriteScreenState extends State<FavoriteScreen> with TickerProviderStat
     'LANGUE(S) D’ENSEIGNEMENT DE LA FILIÈRE: ARABE',
   ];
 
+  /// Builds a list item widget for each "Formation."
   Widget buildFormationsListItem(Map<String, dynamic> item) {
     return GestureDetector(
       onTap: () => showFormationsDialog(context, filiereDetails),
@@ -234,6 +244,7 @@ class _FavoriteScreenState extends State<FavoriteScreen> with TickerProviderStat
     );
   }
 
+  /// Builds either a grid or list view based on specified parameters.
   Widget buildGridOrList(List<Map<String, dynamic>> items, {bool isGrid = true, bool isEcole = true}) {
     if (isGrid) {
       return GridView.builder(
@@ -252,11 +263,7 @@ class _FavoriteScreenState extends State<FavoriteScreen> with TickerProviderStat
         itemCount: items.length,
         padding: const EdgeInsets.all(10),
         itemBuilder: (context, index) {
-          if (isEcole) {
-            return buildEcolesListItem(items[index]);
-          } else {
-            return buildFormationsListItem(items[index]);
-          }
+          return isEcole ? buildEcolesListItem(items[index]) : buildFormationsListItem(items[index]);
         },
       );
     }
@@ -264,9 +271,6 @@ class _FavoriteScreenState extends State<FavoriteScreen> with TickerProviderStat
 
   @override
   Widget build(BuildContext context) {
-    Color tabBarLabelColor = Colors.black;
-    Color tabBarUnselectedLabelColor = Colors.black;
-
     return DefaultTabController(
       length: 4,
       child: Scaffold(
@@ -274,14 +278,14 @@ class _FavoriteScreenState extends State<FavoriteScreen> with TickerProviderStat
           title: const SearchField(),
           bottom: TabBar(
             controller: _tabController,
-            labelColor: tabBarLabelColor,
-            unselectedLabelColor: tabBarUnselectedLabelColor,
-            indicatorColor: Color(0xFF8E24AA),
+            labelColor: Colors.black,
+            unselectedLabelColor: Colors.black,
+            indicatorColor: const Color(0xFF8E24AA),
             tabs: const [
               Tab(text: 'Métiers'),
               Tab(text: 'Ecoles'),
               Tab(text: "Formations"),
-              Tab(text: "Bourses"), // New Bourses tab
+              Tab(text: "Bourses"),
             ],
           ),
         ),
@@ -291,7 +295,7 @@ class _FavoriteScreenState extends State<FavoriteScreen> with TickerProviderStat
             buildGridOrList(metiers, isGrid: true),
             buildGridOrList(ecoles, isGrid: false),
             buildGridOrList(formations, isGrid: false, isEcole: false),
-            buildGridOrList(bourses, isGrid: false, isEcole: false), // New Bourses view
+            buildGridOrList(bourses, isGrid: false, isEcole: false),
           ],
         ),
       ),
